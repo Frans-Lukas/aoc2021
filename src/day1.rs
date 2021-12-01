@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use std::cmp::max;
+use std::collections::HashMap;
 
 #[aoc(day1, part1)]
 pub fn part1_chars(input: &str) -> i32 {
@@ -53,36 +53,30 @@ pub fn part1_chars(input: &str) -> i32 {
 
 #[aoc(day1, part2)]
 pub fn part2_chars(input: &str) -> i32 {
-    let mut sums: Vec<i32> = Vec::new();
-    let mut window_size = 3;
+    let mut window_size: i32 = 3;
     // index = 0 A      0
     // index = 1 A B    0 1
     // index = 2 A B C  0 1 2
     // index = 3   B C    1 2
     // for i in math.max(0, i - 3).. i
-    for (j, line) in input.lines().enumerate() {
-        let mut num: i32 = line.parse().unwrap();
-        let start_index: i32 = max(0, j as i32-window_size);
-        let end_index: i32 = j as i32;
-        for k in start_index..end_index {
-            if !sums.contains(&(k as i32)) {
-                sums.push(0);
-            }
-            *sums.get_mut(k as usize).unwrap()+= num;
-        }
-    }
-
 
     let mut num_inc = 0;
     let mut prev = 0;
-
-    for addor in &sums {
-        let num = *addor;
-        if num > prev && prev != 0 {
+    let numbers: Vec<i32> = input.lines().map(|line| line.parse().unwrap()).collect();
+    for (i, num) in numbers.iter().enumerate() {
+        if i > numbers.len() - window_size as usize {
+            break
+        }
+        let start_index: i32 = max(0, i as i32 - window_size);
+        let end_index: i32 = i as i32;
+        let mut curr = 0;
+        for j in start_index..end_index {
+            curr += numbers[j as usize];
+        }
+        if curr > prev {
             num_inc += 1;
         }
-        prev = num;
+        prev = curr;
     }
-
     num_inc
 }
