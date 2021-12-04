@@ -46,8 +46,8 @@ pub fn part2_chars(input: &str) -> i32 {
     let mut co2_vec = bits.to_vec();
 
     for i in 0..bits[0].len() {
-        let mut most_common_og = find_most_common_g(&mut og_vec, i);
-        let mut most_common_co2 = find_most_common_g(&mut co2_vec, i);
+        let mut most_common_og = find_most_common_bit(&mut og_vec, i);
+        let mut most_common_co2 = find_most_common_bit(&mut co2_vec, i);
         og_vec = og_vec.into_iter().filter(|s| s.chars().nth(i).unwrap().to_digit(10).unwrap() == most_common_og).collect::<Vec<&str>>();
         co2_vec = co2_vec.into_iter().filter(|s| s.chars().nth(i).unwrap().to_digit(10).unwrap() != most_common_co2).collect::<Vec<&str>>();
 
@@ -61,15 +61,15 @@ pub fn part2_chars(input: &str) -> i32 {
     (og_r * co2_r) as i32
 }
 
-fn find_most_common_g(og_vec: &mut Vec<&str>, i: usize) -> u32{
-    let mut num_ones_og = 0;
+fn find_most_common_bit(og_vec: &mut Vec<&str>, i: usize) -> u32{
+    let mut num_ones = 0;
     for bit_p in og_vec.iter() {
         if bit_p.chars().nth(i).unwrap() == '1' {
-            num_ones_og += 1;
+            num_ones += 1;
         }
     }
     let mut to_return = 0;
-    if num_ones_og >= (og_vec.len() - num_ones_og) {
+    if num_ones >= (og_vec.len() - num_ones) {
         to_return = 1;
     }
     to_return
