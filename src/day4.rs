@@ -60,14 +60,6 @@ pub fn part2_chars(input: &str) -> i32 {
             let score = grid.search_bingo_num(num);
             if score > 0 {
                 last_score = score;
-                let mut sum = 0;
-                for line in grid.grid.iter() {
-                    for cell in line {
-                        if !cell.is_found {
-                            sum += cell.number;
-                        }
-                    }
-                }
             }
         }
         bingo_grids.retain(|mut grid| !grid.has_victory());
