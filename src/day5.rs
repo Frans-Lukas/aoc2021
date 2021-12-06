@@ -1,4 +1,4 @@
-use std::cmp::max;
+use std::cmp::{max, min};
 use std::collections::HashMap;
 
 #[aoc(day5, part1)]
@@ -19,8 +19,8 @@ pub fn part1_chars(input: &str) -> i32 {
         };
 
         if start_p.x == end_p.x || start_p.y == end_p.y {
-            for x in start_p.sx(&end_p)..start_p.lx(&end_p) + 1 {
-                for y in start_p.sy(&end_p)..start_p.ly(&end_p) + 1 {
+            for x in min(start_p.x, end_p.x)..max(start_p.x, end_p.x) + 1 {
+                for y in min(start_p.y, end_p.y)..max(start_p.y, end_p.y) + 1 {
                     insert_and_count(&mut found_points, &mut counter, x, y);
                 }
             }
@@ -48,14 +48,14 @@ pub fn part2_chars(input: &str) -> i32 {
         };
 
         if start_p.is_dia(&end_p) {
-            while start_p != end_p{
+            while start_p != end_p {
                 insert_and_count(&mut found_points, &mut counter, start_p.x, start_p.y);
                 start_p.step_closer(&end_p);
             }
             insert_and_count(&mut found_points, &mut counter, start_p.x, start_p.y);
         } else if start_p.x == end_p.x || start_p.y == end_p.y {
-            for x in start_p.sx(&end_p)..start_p.lx(&end_p) + 1 {
-                for y in start_p.sy(&end_p)..start_p.ly(&end_p) + 1 {
+            for x in min(start_p.x, end_p.x)..max(start_p.x, end_p.x) + 1 {
+                for y in min(start_p.y, end_p.y)..max(start_p.y, end_p.y) + 1 {
                     insert_and_count(&mut found_points, &mut counter, x, y);
                 }
             }
@@ -88,31 +88,6 @@ impl PartialEq for Point {
 impl Eq for Point {}
 
 impl Point {
-    pub fn sx(self, p: &Point) -> i32 {
-        if self.x < p.x {
-            return self.x;
-        }
-        p.x
-    }
-    pub fn sy(self, p: &Point) -> i32 {
-        if self.y < p.y {
-            return self.y;
-        }
-        p.y
-    }
-    pub fn lx(self, p: &Point) -> i32 {
-        if self.x > p.x {
-            return self.x;
-        }
-        p.x
-    }
-    pub fn ly(self, p: &Point) -> i32 {
-        if self.y > p.y {
-            return self.y;
-        }
-        p.y
-    }
-
     pub fn is_dia(self, p: &Point) -> bool {
         (self.x - p.x).abs() == (self.y - p.y).abs()
     }
@@ -131,7 +106,6 @@ impl Point {
         }
     }
 }
-
 
 fn insert_and_count(
     found_points: &mut HashMap<Point, i32>,
