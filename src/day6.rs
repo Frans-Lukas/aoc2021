@@ -1,5 +1,3 @@
-use std::cmp::max;
-use std::collections::HashMap;
 
 #[aoc(day6, part1)]
 pub fn part1_chars(input: &str) -> i64 {
@@ -34,7 +32,7 @@ fn day6(input: &str, num_days: i32) -> i64 {
 
     for _ in 0..num_days {
         for j in 0..9 {
-            let mut curr_amount = 0;
+            let curr_amount;
             {
                 curr_amount = fish_tank.get_mut(j as usize).unwrap().curr_amount;
             }

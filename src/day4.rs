@@ -1,6 +1,3 @@
-use std::cmp::max;
-use std::collections::HashMap;
-
 #[aoc(day4, part1)]
 pub fn part1_chars(input: &str) -> i32 {
     let mut game_numbers: Vec<i32> = Vec::new();
@@ -62,7 +59,7 @@ pub fn part2_chars(input: &str) -> i32 {
                 last_score = score;
             }
         }
-        bingo_grids.retain(|mut grid| !grid.has_victory());
+        bingo_grids.retain(|grid| !grid.has_victory());
     }
     last_score
 }
@@ -93,7 +90,7 @@ impl BingoGrid {
             self.grid.push(new_bingo_line);
         }
     }
-    pub fn search_bingo_num(&mut self, bingo_num: i32) -> (i32) {
+    pub fn search_bingo_num(&mut self, bingo_num: i32) -> i32 {
         for line in self.grid.iter_mut() {
             for mut cell in line {
                 if cell.number == bingo_num {
@@ -148,41 +145,6 @@ impl BingoGrid {
         false
     }
 
-    fn diagonals(&self) -> bool {
-        if self.top_left_to_bottom_right() || self.top_right_to_bottom_left() {
-            for line in self.grid.iter() {
-                println!();
-                for cell in line.iter() {
-                    print!("{} ", cell.number);
-                }
-            }
-
-            let one = self.grid[0][4].is_found;
-            let two = self.grid[1][3].is_found;
-            let three = self.grid[2][2].is_found;
-            let four = self.grid[3][1].is_found;
-            let five = self.grid[4][0].is_found;
-            println!("diagonals vic!");
-            return true;
-        }
-
-        false
-    }
-
-    fn top_right_to_bottom_left(&self) -> bool {
-        self.grid[0][4].is_found
-            && self.grid[1][3].is_found
-            && self.grid[2][2].is_found
-            && self.grid[3][1].is_found
-            && self.grid[4][0].is_found
-    }
-    fn top_left_to_bottom_right(&self) -> bool {
-        self.grid[0][0].is_found
-            && self.grid[1][1].is_found
-            && self.grid[2][2].is_found
-            && self.grid[3][3].is_found
-            && self.grid[4][4].is_found
-    }
     fn calculate_score(&self, vic_num: i32) -> i32 {
         let mut sum = 0;
         for line in self.grid.iter() {

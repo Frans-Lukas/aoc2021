@@ -1,5 +1,3 @@
-use std::cmp::max;
-use std::collections::HashMap;
 
 #[aoc(day3, part1)]
 pub fn part1_chars(input: &str) -> i32 {
@@ -46,8 +44,8 @@ pub fn part2_chars(input: &str) -> i32 {
     let mut co2_vec = bits.to_vec();
 
     for i in 0..bits[0].len() {
-        let mut most_common_og = find_most_common_bit(&mut og_vec, i);
-        let mut most_common_co2 = find_most_common_bit(&mut co2_vec, i);
+        let most_common_og = find_most_common_bit(&mut og_vec, i);
+        let most_common_co2 = find_most_common_bit(&mut co2_vec, i);
         og_vec = og_vec.into_iter().filter(|s| s.chars().nth(i).unwrap().to_digit(10).unwrap() == most_common_og).collect::<Vec<&str>>();
         co2_vec = co2_vec.into_iter().filter(|s| s.chars().nth(i).unwrap().to_digit(10).unwrap() != most_common_co2).collect::<Vec<&str>>();
 

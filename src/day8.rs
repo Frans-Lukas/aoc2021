@@ -1,6 +1,4 @@
-use std::char::from_u32;
-use std::cmp::max;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 #[aoc(day8, part1)]
 pub fn part1_chars(input: &str) -> i32 {
@@ -38,7 +36,7 @@ pub fn part2_chars(input: &str) -> i32 {
         }
 
         for nl in left_side.split(' ') {
-            let mut il: Vec<char> = nl.chars().collect();
+            let il: Vec<char> = nl.chars().collect();
             if il.len() == 6
                 && contains_all(&il, &char_vecs.get(&1).unwrap())
                 && contains_all(&il, &char_vecs.get(&7).unwrap())
@@ -71,7 +69,7 @@ pub fn part2_chars(input: &str) -> i32 {
         for num in right_side.split(' ') {
             if num.len() > 1 {
                 for (i, v) in char_vecs.iter() {
-                    let mut il: Vec<char> = num.chars().collect();
+                    let il: Vec<char> = num.chars().collect();
                     if num.len() == v.len() && contains_all(&il, v) {
                         resulting_number += mult * i;
                         mult = mult / 10;
@@ -80,7 +78,6 @@ pub fn part2_chars(input: &str) -> i32 {
             }
         }
         count += resulting_number;
-        println!("num str: {}", resulting_number);
     }
     // for (i, v) in char_vecs.iter() {
     //     print!("{}: ", i);
@@ -109,17 +106,4 @@ fn intersect_count(first: &Vec<char>, second: &Vec<char>) -> i32 {
         }
     }
     sum
-}
-
-fn intersect(hm: &HashMap<char, Vec<char>>, key: char, chars: Vec<char>) {
-    // let mut intersection
-}
-
-fn all_chars_found(lcc: &HashMap<char, Vec<char>>) -> bool {
-    for (c, hs) in lcc.iter() {
-        if hs.len() != 1 {
-            return false;
-        }
-    }
-    true
 }

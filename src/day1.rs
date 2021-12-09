@@ -1,5 +1,4 @@
 use std::cmp::max;
-use std::collections::HashMap;
 
 #[aoc(day1, part1)]
 pub fn part1_chars(input: &str) -> i32 {
@@ -53,7 +52,7 @@ pub fn part1_chars(input: &str) -> i32 {
 
 #[aoc(day1, part2)]
 pub fn part2_chars(input: &str) -> i32 {
-    let mut window_size: i32 = 3;
+    let window_size: i32 = 3;
     // index = 0 A      0
     // index = 1 A B    0 1
     // index = 2 A B C  0 1 2
@@ -63,7 +62,7 @@ pub fn part2_chars(input: &str) -> i32 {
     let mut num_inc = 0;
     let mut prev = 0;
     let numbers: Vec<i32> = input.lines().map(|line| line.parse().unwrap()).collect();
-    for (i, num) in numbers.iter().enumerate() {
+    for (i, _) in numbers.iter().enumerate() {
         if i > numbers.len() - window_size as usize {
             break
         }

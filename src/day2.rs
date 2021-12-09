@@ -1,5 +1,3 @@
-use std::cmp::max;
-use std::collections::HashMap;
 
 #[aoc(day2, part1)]
 pub fn part1_chars(input: &str) -> i32 {

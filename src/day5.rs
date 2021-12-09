@@ -42,7 +42,7 @@ pub fn part2_chars(input: &str) -> i32 {
             x: p1[0].parse().unwrap(),
             y: p1[1].parse().unwrap(),
         };
-        let mut end_p = Point {
+        let end_p = Point {
             x: p2[0].parse().unwrap(),
             y: p2[1].parse().unwrap(),
         };
@@ -63,15 +63,6 @@ pub fn part2_chars(input: &str) -> i32 {
     }
 
     counter
-}
-
-struct Line {
-    start: Point,
-    end: Point,
-}
-
-impl Line {
-    pub fn overlaps(self, other: &Line) {}
 }
 
 #[derive(Debug, Hash, Clone, Copy)]
@@ -109,7 +100,7 @@ impl Point {
 
 fn insert_and_count(
     found_points: &mut HashMap<Point, i32>,
-    mut counter: &mut i32,
+    counter: &mut i32,
     sx: i32,
     sy: i32,
 ) {
