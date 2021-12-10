@@ -15,10 +15,8 @@ pub fn part1_chars(input: &str) -> i32 {
     let mut sum = 0;
     for (i, row) in height_map.iter().enumerate() {
         for (j, cell) in row.iter().enumerate() {
-            // print!("{}", cell);
             if !has_lower_neighbours(&height_map, i, j) {
                 sum += cell + 1;
-                // print_neighbours(&height_map, cell, i, j);
             }
         }
     }
@@ -74,7 +72,8 @@ pub fn part2_chars(input: &str) -> i32 {
         }
     }
     results.sort();
-    results[results.len() - 1] * results[results.len() - 2] * results[results.len() - 3]
+    results.reverse();
+    results[0] * results[1] * results[2]
 }
 
 struct Position {
