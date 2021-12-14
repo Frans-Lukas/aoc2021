@@ -115,7 +115,7 @@ pub fn part2_chars(input: &str) -> i32 {
     }
     let mut max_x = 0;
     let mut max_y = 0;
-    for (p, b) in &map {
+    for (p, _) in &map {
         if p.x > max_x {
             max_x = p.x;
         }
