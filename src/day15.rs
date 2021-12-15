@@ -111,17 +111,7 @@ pub fn part2_chars(input: &str) -> i32 {
         }
         height += 1;
     }
-    //
-    // println!("w: {}, h: {}", width, height);
-    // for x in 0..width {
-    //     println!();
-    //     for y in 0..height {
-    //         // println!("{},{}", x, y);
-    //         let ni = danger_map.get(&Point { y, x }).unwrap();
-    //         print!("{} ", danger_graph.node_weight(*ni).unwrap())
-    //     }
-    // }
-    // println!();
+
     let mut goal = *danger_map
         .get(&Point {
             x: width - 1,
@@ -130,7 +120,6 @@ pub fn part2_chars(input: &str) -> i32 {
         .unwrap();
     for x in 0..width * 5 {
         for y in 0..height * 5 {
-            // println!("{}. {}, x/w: {}", x %width, y %height, x/width);
             let risk_level = calc_risk_level(
                 *danger_graph
                     .node_weight(
@@ -145,32 +134,14 @@ pub fn part2_chars(input: &str) -> i32 {
                 x / width + y / height,
             );
             let node = danger_graph.add_node(risk_level);
-            // println!("x:{}, y:{}", x, y);
             danger_map.insert(Point { x, y }, node);
             goal = node;
         }
     }
-    //
-    // println!("w: {}, h: {}", width, height);
-    // for x in 0..width * 5 {
-    //     println!();
-    //     for y in 0..height * 5 {
-    //         // println!("{},{}", x, y);
-    //         if danger_map.contains_key(&Point { x, y }) {
-    //             let ni = danger_map.get(&Point { x, y }).unwrap();
-    //             print!("{} ", danger_graph.node_weight(*ni).unwrap())
-    //         } else {
-    //             print!("  ");
-    //         }
-    //     }
-    // }
-    // println!();
 
     let directions: Vec<[i32; 2]> = vec![[0, 1], [1, 0], [-1, 0], [0, -1]];
     for x in 0..width * 5 {
         for y in 0..height * 5 {
-            // println!("x: {}, y: {}", x, y);
-            // if danger_map.contains_key(&Point { x, y }) {
             let mut node_index = danger_map.get(&Point { x, y }).unwrap();
             for dir in directions.iter() {
                 let neighbour_point = Point {
@@ -186,7 +157,6 @@ pub fn part2_chars(input: &str) -> i32 {
                     );
                 }
             }
-            // }
         }
     }
 
