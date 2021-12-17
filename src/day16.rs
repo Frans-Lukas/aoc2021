@@ -220,7 +220,7 @@ fn hex_char_to_bits(c: char) -> String {
         'D' => "1101".to_string(),
         'E' => "1110".to_string(),
         'F' => "1111".to_string(),
-        _ => "abcd".to_string(),
+        _ => "GRAVE RUNTIME ERROR".to_string(),
     }
 }
 
